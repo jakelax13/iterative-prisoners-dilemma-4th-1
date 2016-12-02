@@ -6,9 +6,9 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'The name the team gives to itself' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+team_name = 'thaPlayers' # Only 10 chars displayed.
+strategy_name = 'steal_yo_girl'
+strategy_description = 'swoop then skrt'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -17,16 +17,16 @@ def move(my_history, their_history, my_score, their_score):
     Make my move.
     Returns 'c' or 'b'. 
     '''
-
-    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
-    # their_history: a string of the same length as history, possibly empty. 
-    # The first round between these two players is my_history[0] and their_history[0].
-    # The most recent round is my_history[-1] and their_history[-1].
-    
-    # Analyze my_history and their_history and/or my_score and their_score.
-    # Decide whether to return 'c' or 'b'.
-    
-    return 'c'
+    if len(my_history)==0: # It's the first round; collude.
+        return 'c'
+    if len(their_history) > 0: #calculates percent_betray
+        percent_betray = float(their_history.count('b'))/float(len(their_history))*100 
+    if percent_betray > 50:
+        return 'b' # if precent_betray is greater than 50, betray
+    if len(my_history) >97: 
+        return 'b' #if last three rounds, betray
+    else:
+        return 'c' # otherwise collude.
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
